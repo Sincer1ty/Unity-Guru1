@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     public float gravity = -20.0f;
 
     //점프력
-    public float jumpPower = 10.0f;
+    public float jumpPower = 5.3f;
 
     //최대 점프 횟수
     public int maxJump = 2;
@@ -44,6 +44,39 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+        //이동방향 설정
+        Vector3 dir = new Vector3(h, 0, v);
+        dir.Normalize();
+
+        //이동 방향(월드 좌표)을 카메라의 방향 기준으로 (로컬 좌표) 전환
+        dir = Camera.main.transform.TransformDirection(dir);
+
+        //플레이어가 땅에 착지시 현재 점프 횟수를 0으로 초기화
+        //수직 속도 값(중력)을 다시 0으로 초기화
+        if (cc.collisionFlags == CollisionFlags.Below)
+        {
+            jumpCount = 0;
+            yVelocity = 0;
+        }
+
+        //점프 키를 누를 시, 점프력을 수직 속도로 적용
+        //단, 현재 점프 횟수가 최대 점프 횟수를 넘어가지 않아야 함
+        if (Input.GetButtonDown("Jump") && jumpCount < maxJump)
+        {
+            jumpCount++;
+            yVelocity = jumpPower;
+        }
+
+        //캐릭터의 수직속도(중력)을 적용
+        yVelocity += gravity * Time.deltaTime;
+        dir.y = yVelocity;
+
+        //이동방향으로 플레이어 이동
+        //P = P0 + VT
+        //transform.position += dir * moveSpeed * Time.deltaTime;
+        cc.Move(dir * moveSpeed * Time.deltaTime);
     }
 }

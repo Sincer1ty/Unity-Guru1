@@ -22,14 +22,31 @@ public class GameManager : MonoBehaviour
     //플레이어 무브 컴포넌트 변수
     PlayerMove playerM;
 
+    //싱글턴
+    public static GameManager gm;
+
+    private void Awake()
+    {
+        if (gm == null)
+        {
+            gm = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //게임의 상태를 실행 상태로 설정
+        gState = GameState.Run;
+
+        //플레이어 오브젝트를 검색
+        player = GameObject.Find("Player");
+
+        playerM = player.GetComponent<PlayerMove>();
     }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
         
     }

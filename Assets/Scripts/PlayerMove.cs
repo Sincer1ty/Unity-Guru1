@@ -8,10 +8,10 @@ public class PlayerMove : MonoBehaviour
     public float gravity = -20.0f;
 
     //점프력
-    public float jumpPower = 5.3f;
+    public float jumpPower = 4.0f;
 
     //최대 점프 횟수
-    public int maxJump = 2;
+    public int maxJump = 6;
 
     //현재 점프 횟수
     int jumpCount = 0;
@@ -68,7 +68,7 @@ public class PlayerMove : MonoBehaviour
         {
             jumpCount++;
             yVelocity = jumpPower;
-        }
+        }        
 
         //캐릭터의 수직속도(중력)을 적용
         yVelocity += gravity * Time.deltaTime;

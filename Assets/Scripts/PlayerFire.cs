@@ -14,6 +14,9 @@ public class PlayerFire : MonoBehaviour
     // 소독제 발사 효과 이펙트 
     public GameObject sanitizerEffect;
 
+    // 발사 무기 공격력
+    public int weaponPower = 5;
+
 
 
 
@@ -39,17 +42,27 @@ public class PlayerFire : MonoBehaviour
             // 레이 발사 후 만일 부딪힌 물체가 있으면 피격 이펙트 표시
             if(Physics.Raycast(ray, out hitInfo))
             {
-                // 피격 이펙트의 위치를 레이가 부딪한 지점으로 이동
-                bulletEffect.transform.position = hitInfo.point;
+                // 레이에 부딪힌 대상의 레이어가 'Enemy'일 경우 데미지 함수 실행
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    VillainFSM vFSM = hitInfo.transform.GetComponent<VillainFSM>();
+                    vFSM.HitVillain(weaponPower);
+                }
+                // 그렇지 않다면 레이에 부딪힌 지점에 피격 이펙트 플레이
+                else
+                {
+                    // 피격 이펙트의 위치를 레이가 부딪한 지점으로 이동
+                    bulletEffect.transform.position = hitInfo.point;
 
-                // 피격 이펙트의 forward  방향을 레이가 부딪힌 지점의 법선 벡터와 일치
-                bulletEffect.transform.forward = hitInfo.normal;
+                    // 피격 이펙트의 forward  방향을 레이가 부딪힌 지점의 법선 벡터와 일치
+                    bulletEffect.transform.forward = hitInfo.normal;
 
-                // 피격 이펙트를 플레이
-                ps.Play();
+                    // 피격 이펙트를 플레이
+                    ps.Play();
 
-                // 소독제 이펙트 실시
-                StartCoroutine(San_EffectOn(0.05f));
+                    // 소독제 이펙트 실시
+                    StartCoroutine(San_EffectOn(0.05f));
+                }
 
             }
         }

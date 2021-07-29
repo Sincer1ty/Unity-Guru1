@@ -152,7 +152,7 @@ public class VillainFSM : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
-                player.GetComponent<PlayerMove>().DamageAction(attackPower);
+                player.GetComponent<PlayerController>().DamageAction(attackPower);
                 currentTime = 0;
             }
         }

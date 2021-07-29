@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     GameObject player;
 
     //플레이어 무브 컴포넌트 변수
-    PlayerMove playerM;
+    PlayerController playerC;
 
     //싱글턴
     public static GameManager gm;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         //플레이어 오브젝트를 검색
         player = GameObject.Find("Player");
 
-        playerM = player.GetComponent<PlayerMove>();
+        playerC = player.GetComponent<PlayerController>();
     }
 
         // Update is called once per frame

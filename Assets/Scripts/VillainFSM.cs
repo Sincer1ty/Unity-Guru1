@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VillainFSM : MonoBehaviour
 {
@@ -20,20 +21,20 @@ public class VillainFSM : MonoBehaviour
     // 빌런 상태 변수
     VillainState v_state;
 
+    //플레이어 게임 오브젝트
+    GameObject player;
+
     // 플레이어 발견 범위
-    public float findDistance = 8f;
+    public float findDistance = 8.0f;
 
-    // 플레이어 트랜스폼
-    Transform player;
-
-    // 공격 가능 범위
-    public float attackDistance = 2f;
+    // 캐릭터 컨트롤러
+    CharacterController cc;
 
     // 이동속도
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5.0f;
 
-    // 캐릭터 컨트롤러 컴포넌트
-    CharacterController cc;
+    // 공격 가능 범위
+    public float attackDistance = 2.0f;
 
     // 누적시간
     float currentTime = 0;
@@ -49,28 +50,39 @@ public class VillainFSM : MonoBehaviour
     Quaternion originRot;
 
     // 이동 가능 범위
-    public float moveDistance = 20f;
+    public float moveDistance = 20.0f;
 
-    // 빌런 체력
-    public int hp = 15;
+    // 최대 체력
+    public int maxHp = 10;
 
+    //현재 체력 변수
+    int currentHp;
 
+    //네비게이션 메쉬 에이전트
+    NavMeshAgent smith;
 
     void Start()
     {
         // 최초 빌런 상태는 idle
         v_state = VillainState.Idle;
 
-        // 플레이어 트랜스폼 컴포넌트 받아오기
-        player = GameObject.Find("Player").transform;
+        // 플레이어 검색
+        player = GameObject.Find("Player");
 
-        // 캐릭터 플레이어 컴포넌트 가져오기
+        // 캐릭터 컨트롤러 가져오기
         cc = GetComponent<CharacterController>();
 
-        // 초기 위치, 회전 값 저장
+        // 초기 위치, 회전 저장
         originPos = transform.position;
         originRot = transform.rotation;
 
+        //현재 체력 설정
+        currentHp = maxHp;
+
+        //네브메쉬 에이전트 컴포넌트 가져오기
+        smith = GetComponent<NavMeshAgent>();
+        smith.speed = moveSpeed;
+        smith.stoppingDistance = attackDistance;
     }
 
     // Update is called once per frame
@@ -102,66 +114,90 @@ public class VillainFSM : MonoBehaviour
 
     void Idle()
     {
-        // 플레이어와의 거리가 발견 범위보다 가까워질 경우 >> move
-        if (Vector3.Distance(transform.position, player.position) < findDistance)
+        // 플레이어와의 거리가 발견 범위이내 >> move
+        if (Vector3.Distance(player.transform.position, transform.position) < findDistance)
         {
+            //이동 상태로 변경
             v_state = VillainState.Move;
+            print("상태전환: Idle -> Move");            
         }
     }
 
     void Move()
     {
 
-        // 현재 위치가 초기 위치에서 이동 가능 범위를 넘어갈 경우
-        if (Vector3.Distance(transform.position, originPos) > moveDistance)
+        // 현재 위치가 이동 가능 범위밖
+        if (Vector3.Distance(originPos, transform.position) > moveDistance)
         {
             // 현재 상태를 복귀로 전환
             v_state = VillainState.Return;
-
+            print("상태 전환: Move -> Return");
         }
 
         // 플레이어와의 거리가 공격 범위보다 멀 경우 >> 플레이어를 향해 이동
-        else if (Vector3.Distance(transform.position, player.position) > attackDistance)
+        else if (Vector3.Distance(player.transform.position, transform.position) > attackDistance)
         {
-            // 이동 방향 설정
-            Vector3 dir = (player.position - transform.position).normalized;
-
-            // 캐릭터 컨트롤러를 이용해 이동
-            cc.Move(dir * moveSpeed * Time.deltaTime);
-
-            // 플레이어를 향해 방향 전환
-            transform.forward = dir;
+            //네브메쉬 에이전트를 이용하여 타겟 방향으로 이동
+            smith.SetDestination(player.transform.position);
+            smith.stoppingDistance = attackDistance;
         }
 
-        // 그렇지 않다면 공격상태로 전환
+        // 공격 범위 안
         else
         {
+            //공격 상태로 변경
             v_state = VillainState.Attack;
+            print("상태 전환: Move -> Attack");
 
             // 누적 시간을 공격 딜레이 시간만큼 미리 진행
             currentTime = attackDelay;
+
+            //이동 멈추고, 타겟 초기화
+            smith.isStopped = true;
+            smith.ResetPath();
         }
     }
 
+    //공격
     void Attack()
     {
         // 플레이어가 공격 범위 내에 존재 >> 플레이어 공격
-        if (Vector3.Distance(transform.position, player.position) < attackDistance)
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
         {
-            // 일정한 시간마다 플레이어 공격
-            currentTime += Time.deltaTime;
-            if (currentTime > attackDelay)
+            //현재 대기시간이 공격 대기 시간을 넘어갔다면
+            if (currentTime >= attackDelay)
             {
-                player.GetComponent<PlayerController>().DamageAction(attackPower);
                 currentTime = 0;
+                //플레이어 공격
+                print("공격!");
+            }
+
+            //// 일정한 시간마다 플레이어 공격
+            //currentTime += Time.deltaTime;
+            //if (currentTime > attackDelay)
+            //{
+            //    player.GetComponent<PlayerController>().DamageAction(attackPower);
+            //    currentTime = 0;
+            //}
+            else
+            {
+                //시간을 누적
+                currentTime += Time.deltaTime;
             }
         }
-        // 그렇지 않다면 이동상태로 전환
         else
         {
+            //이동 상태로 전환
             v_state = VillainState.Move;
-            currentTime = 0;
+            print("상태 전환: Attack -> Move");
         }
+    }
+
+    //플레이어에게 데미지를 주는 함수
+    public void HitEvent()
+    {
+        PlayerMove pm = player.GetComponent<PlayerMove>();
+        pm.DamageAction(attackPower);
     }
 
     void Return()
@@ -186,33 +222,6 @@ public class VillainFSM : MonoBehaviour
 
             v_state = VillainState.Idle;
         }
-    }
-
-    // 데미지 실행 함수
-    public void HitVillain(int hitPower)
-    {
-        // 이미 피격, 사망, 복귀 상태라면 함수 종료
-        if (v_state == VillainState.Damaged || v_state == VillainState.Die || v_state == VillainState.Return)
-        {
-            return;
-        }
-        
-        // 플레이어의 공격력만큼 에너미 체력 감소
-        hp -= hitPower;
-
-        // 빌런 체력이 0보다 크면 피격 상태로 전환
-        if (hp > 0)
-        {
-            v_state = VillainState.Damaged;
-            Damaged();
-        }
-        // 그렇지 않다면 죽음 상태로 전환
-        else
-        {
-            v_state = VillainState.Die;
-            Die();
-        }
-
     }
 
     void Damaged()
@@ -248,5 +257,35 @@ public class VillainFSM : MonoBehaviour
         // 2초동안 기다린 후 자기 자신 제거
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+    }
+
+    // 데미지 처리 함수
+    public void HitVillain(int value)
+    {
+        // 이미 피격, 사망, 복귀 상태라면 함수 종료
+        if (v_state == VillainState.Damaged || v_state == VillainState.Die || v_state == VillainState.Return)
+        {
+            return;
+        }
+
+        // 플레이어의 공격력만큼 에너미 체력 감소
+       currentHp -= value;
+
+        // 빌런 hp가 0보다 크면 
+        if (currentHp > 0)
+        {
+            //피격 상태로 전환
+            v_state = VillainState.Damaged;
+            print("상태 전환: Any state -> Damaged");
+            Damaged();
+        }
+        // 그렇지 않다면
+        else
+        {
+            //죽음 상태로 전환
+            v_state = VillainState.Die;
+            print("상태 전환: Any state -> Die");
+            Die();
+        }
     }
 }

@@ -31,6 +31,10 @@ public class PlayerMove : MonoBehaviour
     //최대 체력
     public int maxHp = 10;
 
+    //회전 감도
+    public float rotSpeed = 200.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +56,18 @@ public class PlayerMove : MonoBehaviour
         dir.Normalize();
 
         //이동 방향(월드 좌표)을 카메라의 방향 기준으로 (로컬 좌표) 전환
-        dir = Camera.main.transform.TransformDirection(dir);
+        //dir = Camera.main.transform.TransformDirection(dir);
+
+        if(!(h==0&&v==0))
+        {
+            //이동방향으로 플레이어 이동
+            //P = P0 + VT
+            //transform.position += dir * moveSpeed * Time.deltaTime;
+            cc.Move(dir * moveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotSpeed);
+            
+
+        }
 
         //플레이어가 땅에 착지시 현재 점프 횟수를 0으로 초기화
         //수직 속도 값(중력)을 다시 0으로 초기화
@@ -77,6 +92,16 @@ public class PlayerMove : MonoBehaviour
         //이동방향으로 플레이어 이동
         //P = P0 + VT
         //transform.position += dir * moveSpeed * Time.deltaTime;
-        cc.Move(dir * moveSpeed * Time.deltaTime);
+        //cc.Move(dir * moveSpeed * Time.deltaTime);
+
+    }
+
+
+
+    // 플레이어 피격 함수
+    public void DamageAction(int damage)
+    {
+        // 에너미의 공격력만큼 플레이어의 체력 감소
+        hp -= damage;
     }
 }

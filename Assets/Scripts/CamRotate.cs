@@ -14,15 +14,19 @@ public class CamRotate : MonoBehaviour
 
     public float low_angleLimit = 30.0f;
     public float high_angleLimit = 30.0f;
+
+    Transform player;
+    
     
     void Start()
     {
-        
+        player=GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         // 사용자의 마우스 입력을 받아 물체 회전
         // 1. 마우스 입력
         float mouse_X = Input.GetAxis("Mouse X");
@@ -37,7 +41,10 @@ public class CamRotate : MonoBehaviour
 
         // 2. 마우스 입력 값을 이용해 회전 방향 결정
         transform.eulerAngles = new Vector3(-my, mx, 0);
+        */
 
+        Vector3 pl = (player.transform.position - transform.position).normalized;
+        transform.forward = pl;
         /*
         // 3. 회전 방향으로 물체 회전
         // r = r0 + vt

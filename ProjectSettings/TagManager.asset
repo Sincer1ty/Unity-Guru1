@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FxTemporaire
+  - Vaccine
   layers:
   - Default
   - TransparentFX

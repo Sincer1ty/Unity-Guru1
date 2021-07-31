@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +38,7 @@ public class VillainFSM : MonoBehaviour
     float currentTime = 0;
 
     // 공격 딜레이 시간
-    float attackDelay = 2f;
+    float attackDelay = 2.0f;
 
     // 빌런 공격력
     public int attackPower = 3;
@@ -63,7 +61,7 @@ public class VillainFSM : MonoBehaviour
 
     void Start()
     {
-        // 최초 빌런 상태는 idle
+        // 초기 빌런 상태는 idle
         v_state = VillainState.Idle;
 
         // 플레이어 검색
@@ -104,10 +102,8 @@ public class VillainFSM : MonoBehaviour
                 Return();
                 break;
             case VillainState.Damaged:
-                //Damaged();
                 break;
             case VillainState.Die:
-                //Die();
                 break;
         }
     }

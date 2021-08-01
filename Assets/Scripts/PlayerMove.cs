@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -26,10 +27,14 @@ public class PlayerMove : MonoBehaviour
     CharacterController cc;
 
     //체력 변수
-    public int hp;
+    int hp;
+
 
     //최대 체력
     public int maxHp = 10;
+
+    // 슬라이더 UI
+    public Slider hpSlider;
 
     //회전 감도
     public float rotSpeed = 200.0f;
@@ -48,6 +53,13 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 게임 상태가 게임 중 상태가 아니면 업데이트 함수 종료
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -88,6 +100,10 @@ public class PlayerMove : MonoBehaviour
         //캐릭터의 수직속도(중력)을 적용
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
+
+
+        // 슬라이더 value를 체력 비율로 적용
+        hpSlider.value = (float)hp / (float)maxHp;
 
         //이동방향으로 플레이어 이동
         //P = P0 + VT

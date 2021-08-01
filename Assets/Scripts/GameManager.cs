@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     //싱글턴
     public static GameManager gm;
 
+  
+
     private void Awake()
     {
         if (gm == null)
@@ -43,9 +45,6 @@ public class GameManager : MonoBehaviour
     {
         // 게임 초기 상태 = 준비상태 
         gState = GameState.Ready;
-
-        //게임의 상태를 실행 상태로 설정
-        //gState = GameState.Run;
 
         // 게임 시작 코루틴 함수 실행
         StartCoroutine(GameStart());
@@ -80,9 +79,24 @@ public class GameManager : MonoBehaviour
         gState = GameState.Run;
     }
 
-        // Update is called once per frame
+        
+    
+
         void Update()
     {
+        // 백신 개수 출력
+
+
+        // 배드엔딩
+        if (GameObject.Find("Player").GetComponent<PlayerController>().hp == 0)
+        {
+            
+        }
+
+        // 해피엔딩
+        
         
     }
+
+
 }

@@ -73,10 +73,15 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 게임 상태가 게임 중 상태가 아니면 업데이트 함수 종료
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
         //// 마우스 왼쪽 버튼을 누르면 시선이 바라보는 방향으로 공격
         //// 마우스 왼쪽 버튼 입력
-        //if (Input.GetMouseButton(0))
-        //{
+        if (Input.GetMouseButton(0))
+        {
         //    // 레이 생성 후 발사될 위치, 진행 방향 설정
         //    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
@@ -102,7 +107,9 @@ public class PlayerFire : MonoBehaviour
         //        // 피격 이펙트를 플레이
         //        ps.Play();
 
-        //    }
+        }
+
+
         //    // 소독제 이펙트 코루틴 함수 실행
         //    StartCoroutine(San_EffectOn(0.5f));
 

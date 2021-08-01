@@ -39,6 +39,12 @@ public class VaccineDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 게임 상태가 게임 중 상태가 아니면 업데이트 함수 종료
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
     }
 

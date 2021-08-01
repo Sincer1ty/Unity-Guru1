@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class VillainFSM : MonoBehaviour
 {
@@ -56,6 +57,9 @@ public class VillainFSM : MonoBehaviour
     //현재 체력 변수
     int currentHp;
 
+    // 슬라이더 변수
+    public Slider hpSlider;
+
     //네비게이션 메쉬 에이전트
     NavMeshAgent smith;
 
@@ -86,6 +90,12 @@ public class VillainFSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 게임 상태가 게임 중 상태가 아니면 업데이트 함수 종료
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
         // 현재 상태 체크 >> 해당 상태별로 정해진 기능 수행
         switch (v_state)
         {
@@ -105,7 +115,11 @@ public class VillainFSM : MonoBehaviour
                 break;
             case VillainState.Die:
                 break;
+
         }
+
+        // hp 슬라이더 값에 체력 비율 적용 
+        hpSlider.value = (float)currentHp / (float)maxHp;
     }
 
     void Idle()

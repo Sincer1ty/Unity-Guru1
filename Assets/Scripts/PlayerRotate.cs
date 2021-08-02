@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
 public class PlayerRotate : MonoBehaviour
 {
-    
     // 회전 속도 변수
     public float rotSpeed = 200f;
 
@@ -28,7 +26,6 @@ public class PlayerRotate : MonoBehaviour
             return;
         }
 
-        
         // 사용자의 마우스 입력을 받아 물체 회전
         // 1. 마우스 입력
         float mouse_X = Input.GetAxis("Mouse X");
@@ -38,9 +35,6 @@ public class PlayerRotate : MonoBehaviour
 
         // 2. 마우스 입력 값을 이용해 회전 방향 결정
         transform.eulerAngles= new Vector3(0, mx, 0);
-        
-        
+
     }
 }
-*/
-

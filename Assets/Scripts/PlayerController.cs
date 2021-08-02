@@ -31,9 +31,8 @@ public class PlayerController : MonoBehaviour
     //나의 캐릭터 콘트롤러
     CharacterController cc;
 
-    //[HideInInspector]
     //체력 변수
-    public int hp;
+    int hp;
 
     //최대 체력
     public int maxHp = 10;
@@ -162,7 +161,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HitEffect()
     {
-
         // 1. 이펙트를 켠다(활성화 시킨다)
         hitEffect.SetActive(true);
 

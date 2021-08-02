@@ -2,61 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class FadeController : MonoBehaviour
 {
-    public void FadeIn(float fadeouttime, System.Action nextEvent = null)
+    public Image Panel;
+
+    float time = 0f;
+    public float F_time = 100
+        0f;
+
+    public void Fade()
     {
-        StartCoroutine(CoFadeIn(fadeouttime, nextEvent));
+        StartCoroutine(FadeFlow());
+        
     }
-
-    public void FadeOut(float fadeouttime, System.Action nextEvent = null)
+    IEnumerator FadeFlow()
     {
-        StartCoroutine(CoFadeOut(fadeouttime, nextEvent));
-    }
+        yield return new WaitForSeconds(1.5f);
 
-
-    // 투명 >> 불투명
-    IEnumerator CoFadeIn(float fadeouttime, System.Action nextEvent = null)
-    {
-        SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
-        Color tempcolor = sr.color;
-        while (tempcolor.a < 1f)
+        Panel.gameObject.SetActive(true);
+        //time = 0;
+        Color alpha = Panel.color;
+        while (alpha.a < 1f)
         {
-            tempcolor.a += Time.deltaTime / fadeouttime;
-            sr.color = tempcolor;
-
-            if (tempcolor.a >= 1f) tempcolor.a = 1f;
-
+            time += Time.deltaTime / F_time;
+            alpha.a = Mathf.Lerp(0, 1, time);
+            Panel.color = alpha;
             yield return null;
         }
-        sr.color = tempcolor;
-        if (nextEvent != null) nextEvent();
-    }
 
-    // 불투명 >> 투명
-    IEnumerator CoFadeOut(float fadeouttime, System.Action nextEvent = null)
-    {
-        SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
-        Color tempcolor = sr.color;
-        while (tempcolor.a > 0f)
+        yield return new WaitForSeconds(1.0f);
+        takeScene();
+        /*
+        time = 0;
+       
+        while (alpha.a>0f)
         {
-            tempcolor.a += Time.deltaTime / fadeouttime;
-            sr.color = tempcolor;
-
-            if (tempcolor.a >= 0f) tempcolor.a = 0f;
-
+            time += Time.deltaTime / F_time;
+            alpha.a = Mathf.Lerp(1, 0, time);
+            Panel.color = alpha;
             yield return null;
         }
-        sr.color = tempcolor;
-        if (nextEvent != null) nextEvent();
+        */
+
+
+
     }
 
-    // Start is called before the first frame update
-    void Start()
+    // 씬 호출 함수
+    void takeScene()
     {
-
+        if (GameObject.Find("Player").GetComponent<PlayerController>().hp == 0)
+        {
+            SceneManager.LoadScene("SampleScene"); // 배드엔딩씬 넣기
+        }
+        
+        /*
+        if() // 해피엔딩씬 조건
+        {
+            SceneManager.LoadScene(""); // 해피엔딩씬 넣기
+        }
+        */
     }
+    
+    
 
     // Update is called once per frame
     void Update()

@@ -129,7 +129,7 @@ public class VillainFSM : MonoBehaviour
         {
             //이동 상태로 변경
             v_state = VillainState.Move;
-            print("상태전환: Idle -> Move");            
+            print("Villain 상태전환: Idle -> Move");            
         }
     }
 
@@ -141,7 +141,7 @@ public class VillainFSM : MonoBehaviour
         {
             // 현재 상태를 복귀로 전환
             v_state = VillainState.Return;
-            print("상태 전환: Move -> Return");
+            print("Villain 상태 전환: Move -> Return");
         }
 
         // 플레이어와의 거리가 공격 범위보다 멀 경우 >> 플레이어를 향해 이동
@@ -157,7 +157,7 @@ public class VillainFSM : MonoBehaviour
         {
             //공격 상태로 변경
             v_state = VillainState.Attack;
-            print("상태 전환: Move -> Attack");
+            print("Villain 상태 전환: Move -> Attack");
 
             // 누적 시간을 공격 딜레이 시간만큼 미리 진행
             currentTime = attackDelay;
@@ -179,7 +179,7 @@ public class VillainFSM : MonoBehaviour
             {
                 currentTime = 0;
                 //플레이어 공격
-                print("공격!");
+                print("Villain의 공격!");
             }
 
             //// 일정한 시간마다 플레이어 공격
@@ -199,20 +199,20 @@ public class VillainFSM : MonoBehaviour
         {
             //이동 상태로 전환
             v_state = VillainState.Move;
-            print("상태 전환: Attack -> Move");
+            print("Villain 상태 전환: Attack -> Move");
         }
     }
 
     //플레이어에게 데미지를 주는 함수
     public void HitEvent()
     {
-        PlayerMove pm = player.GetComponent<PlayerMove>();
-        pm.DamageAction(attackPower);
+        PlayerController pc = player.GetComponent<PlayerController>();
+        pc.DamageAction(attackPower);
     }
 
     void Return()
     {
-        // 초기 위치에서의 거리가 0.1f 이상이면 초기 위치 쪽으로 이동
+        // 초기 위치에서의 거리가 0.1f 초과면 초기 위치 쪽으로 이동
         if (Vector3.Distance(transform.position, originPos) > 0.1f)
         {
             Vector3 dir = (originPos - transform.position).normalized;
@@ -228,9 +228,9 @@ public class VillainFSM : MonoBehaviour
             transform.position = originPos;
             transform.rotation = originRot;
 
-            // hp 다시 회복
-
+            //대기 상태로 전환
             v_state = VillainState.Idle;
+            print("Villain 상태 전환: Return -> Idle");
         }
     }
 
@@ -286,7 +286,7 @@ public class VillainFSM : MonoBehaviour
         {
             //피격 상태로 전환
             v_state = VillainState.Damaged;
-            print("상태 전환: Any state -> Damaged");
+            print("Villain 상태 전환: Any state -> Damaged");
             Damaged();
         }
         // 그렇지 않다면
@@ -294,7 +294,7 @@ public class VillainFSM : MonoBehaviour
         {
             //죽음 상태로 전환
             v_state = VillainState.Die;
-            print("상태 전환: Any state -> Die");
+            print("Villain 상태 전환: Any state -> Die");
             Die();
         }
     }

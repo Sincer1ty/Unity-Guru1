@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
 
     //체력 변수
-    int hp;
+    public int hp;
 
     //최대 체력
     public int maxHp = 10;

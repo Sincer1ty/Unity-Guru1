@@ -180,6 +180,7 @@ public class VillainFSM : MonoBehaviour
                 currentTime = 0;
                 //플레이어 공격
                 print("공격!");
+                HitEvent();
             }
 
             //// 일정한 시간마다 플레이어 공격
@@ -209,6 +210,8 @@ public class VillainFSM : MonoBehaviour
         //PlayerMove pm = player.GetComponent<PlayerMove>();
         PlayerController pm = player.GetComponent<PlayerController>();
         pm.DamageAction(attackPower);
+        if(GameObject.Find("Player").GetComponent<PlayerController>().hp<=0)
+        { return; }
     }
 
     void Return()

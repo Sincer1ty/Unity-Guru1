@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BFB0DF50-1466-1130-521F-74F9FE051F2A}</ProjectGuid>
+    <ProjectGuid>{F247FB94-CBC0-FFD6-9900-176C719F4490}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -302,14 +302,14 @@
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.5.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
-      <HintPath>Assets\JMO Assets\Editor\JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.5.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
+      <HintPath>Assets\JMO Assets\Editor\JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -701,7 +701,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{AB04CE14-0A88-76B0-A59A-5372A0F6370C}</Project>
+      <Project>{646CC3A9-0786-AF46-0F22-3D906F34B1F8}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>

@@ -10,8 +10,7 @@ public class FadeController : MonoBehaviour
     public Image Panel;
 
     float time = 0f;
-    public float F_time = 100
-        0f;
+    public float F_time = 1000f;
 
     public void Fade()
     {
@@ -54,7 +53,7 @@ public class FadeController : MonoBehaviour
     // 씬 호출 함수
     void takeScene()
     {
-        if (GameObject.Find("Player").GetComponent<PlayerController>().hp == 0)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0)
         {
             SceneManager.LoadScene("SampleScene"); // 배드엔딩씬 넣기
         }

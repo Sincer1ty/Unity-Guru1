@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamRotate : MonoBehaviour
 {
-
+    /*
     // 회전 속도 변수
     public float rotSpeed = 200f;
 
@@ -16,21 +16,23 @@ public class CamRotate : MonoBehaviour
     public float high_angleLimit = 30.0f;
 
     Transform player;
-    
+    */
     
     void Start()
     {
-        player=GameObject.Find("Player").transform;
+        //player=GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         // 게임 상태가 게임 중 상태가 아니면 업데이트 함수 종료
         if (GameManager.gm.gState != GameManager.GameState.Run)
         {
             return;
         }
+        */
 
         /*
         // 사용자의 마우스 입력을 받아 물체 회전
@@ -48,9 +50,12 @@ public class CamRotate : MonoBehaviour
         // 2. 마우스 입력 값을 이용해 회전 방향 결정
         transform.eulerAngles = new Vector3(-my, mx, 0);
         */
-
+        
+        /*
         Vector3 pl = (player.transform.position - transform.position).normalized;
         transform.forward = pl;
+
+        */
         /*
         // 3. 회전 방향으로 물체 회전
         // r = r0 + vt

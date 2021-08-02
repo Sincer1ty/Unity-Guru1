@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     //싱글턴
     public static GameManager gm;
+
+    // 옵션 메뉴 UI 오브젝트
+    public GameObject optionUI;
 
     private void Awake()
     {
@@ -84,5 +88,48 @@ public class GameManager : MonoBehaviour
         void Update()
     {
         
+    }
+
+    // 옵션 메뉴 켜기
+    public void OpenOptionWindow()
+    {
+        // 게임 상태를 pause로 변경
+        gState = GameState.Pause;
+
+        // 시간 멈춤
+        Time.timeScale = 0;
+
+        // 옵션 메뉴 창 활성화
+        optionUI.SetActive(true);
+    }
+
+    // 옵션 메뉴 끄기(계속하기)
+    public void CloseOptionWindow()
+    {
+        // 게임 상태를 run 상태로 변경
+        gState = GameState.Run;
+
+        // 시간을 1배로 되돌림
+        Time.timeScale = 1.0f;
+
+        // 옵션 메뉴 창 비활성화
+        optionUI.SetActive(false);
+    }
+
+    // 게임 재시작(현재 씬 다시 로드)
+    public void GameRestart()
+    {
+        // 시간을 1배로 되돌림
+        Time.timeScale = 1.0f;
+
+        // 현재 씬을 다시 로드
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // 게임 종료
+    public void GameQuit()
+    {
+        // 어플리케이션 종료
+        Application.Quit();
     }
 }

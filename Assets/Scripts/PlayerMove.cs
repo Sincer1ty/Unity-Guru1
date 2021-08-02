@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
 public class PlayerMove : MonoBehaviour
 {
     //중력 변수
@@ -121,3 +122,4 @@ public class PlayerMove : MonoBehaviour
         hp -= damage;
     }
 }
+*/

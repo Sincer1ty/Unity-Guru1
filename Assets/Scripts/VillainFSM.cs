@@ -206,7 +206,8 @@ public class VillainFSM : MonoBehaviour
     //플레이어에게 데미지를 주는 함수
     public void HitEvent()
     {
-        PlayerMove pm = player.GetComponent<PlayerMove>();
+        //PlayerMove pm = player.GetComponent<PlayerMove>();
+        PlayerController pm = player.GetComponent<PlayerController>();
         pm.DamageAction(attackPower);
     }
 

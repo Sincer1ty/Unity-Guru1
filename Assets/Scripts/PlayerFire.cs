@@ -22,10 +22,10 @@ public class PlayerFire : MonoBehaviour
     //사정거리
     private float fireDistance = 50f;
 
-    //public interface IDamageable
-    //{
-    //    void TakeHit(float damage, RaycastHit hit);
-    //}
+    public interface IDamageable
+    {
+        void TakeHit(float damage, RaycastHit hit);
+    }
 
     void Start()
     {
@@ -35,50 +35,26 @@ public class PlayerFire : MonoBehaviour
 
     public void Shot()
     {
-        //레이 생성
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-
         //충돌 정보 저장
         RaycastHit hit;
 
         //총알이 맞은 곳 저장
         Vector3 hitPosition = Vector3.zero;
 
-        //레이를 발사해서 부딪힌 대상이 있다면
-        if (Physics.Raycast(ray, out hit))
-        {
-            //부딪힌 대상의 이름을 콘솔창에 출력
-            print(hit.transform.name);
-        }
         //레이캐스트
         if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance))
         {
             //레이가 충돌한 경우
 
-            ////충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
-            //IDamageable target = hit.collider.GetComponent<IDamageable>();
+            //충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
+            IDamageable target = hit.collider.GetComponent<IDamageable>();
 
-            //레이에 부딪힌 대상의 레이어가 'Enemy'일 경우 데미지 함수 실행
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            //위 과정 성공
+            if (target != null)
             {
-                print("h");
-                VillainFSM vFSM = hit.transform.GetComponent<VillainFSM>();
                 //HitVillain 함수 실행
-                vFSM.HitVillain(weaponPower);
+                target.TakeHit(weaponPower, hit);
             }
-
-            // 피격 이펙트의 위치를 레이가 부딪한 지점으로 이동
-            bulletEffect.transform.position = hit.point;
-
-            // 피격 이펙트의 forward  방향을 레이가 부딪힌 지점의 노멀 벡터와 일치
-            bulletEffect.transform.forward = hit.normal;
-            
-
-            ////위 과정 성공
-            //if (target != null)
-            //{
-            //    target.TakeHit(weaponPower, hit);
-            //}
 
             //레이 충돌 위치 저장
             hitPosition = hit.point;
@@ -89,6 +65,7 @@ public class PlayerFire : MonoBehaviour
             //최대 사정거리까지 갔을 때의 위치를 충돌 위치로 사용
             hitPosition = fireTransform.position + fireTransform.forward * fireDistance;
         }
+
         //발사 이펙트 재생        
         sanitizerEffect.Play();
     }
@@ -105,20 +82,50 @@ public class PlayerFire : MonoBehaviour
         //// 마우스 왼쪽 버튼 입력
         if (Input.GetMouseButton(0))
         {
-            //    // 레이 생성 후 발사될 위치, 진행 방향 설정
-            //    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        //    // 레이 생성 후 발사될 위치, 진행 방향 설정
+        //    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-            //    // 레이가 부딪힌 대상의 정보를 저장할 변수 생성
-            //    RaycastHit hitInfo = new RaycastHit();
+        //    // 레이가 부딪힌 대상의 정보를 저장할 변수 생성
+        //    RaycastHit hitInfo = new RaycastHit();
 
-            //    // 레이 발사 후 만일 부딪힌 물체가 있으면 피격 이펙트 표시
-            //    if (Physics.Raycast(ray, out hitInfo))
-            //    {
-            //        
+        //    // 레이 발사 후 만일 부딪힌 물체가 있으면 피격 이펙트 표시
+        //    if (Physics.Raycast(ray, out hitInfo))
+        //    {
+        //        // 레이에 부딪힌 대상의 레이어가 'Enemy'일 경우 데미지 함수 실행
+        //        if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        //        {
+        //            VillainFSM vFSM = hitInfo.transform.GetComponent<VillainFSM>();
+        //            vFSM.HitVillain(weaponPower);
+        //        }
 
-            //        // 피격 이펙트를 플레이
-            //        ps.Play();
-            Shot();
+        //        // 피격 이펙트의 위치를 레이가 부딪한 지점으로 이동
+        //        bulletEffect.transform.position = hitInfo.point;
+
+        //        // 피격 이펙트의 forward  방향을 레이가 부딪힌 지점의 노멀 벡터와 일치
+        //        bulletEffect.transform.forward = hitInfo.normal;
+
+        //        // 피격 이펙트를 플레이
+        //        ps.Play();
+
         }
+
+
+        //    // 소독제 이펙트 코루틴 함수 실행
+        //    StartCoroutine(San_EffectOn(0.5f));
+
+        Shot();
     }
+
+    //// 소독제 이펙트 코루틴 함수
+    //IEnumerator San_EffectOn(float duration)
+    //{
+    //    //이펙트 오브젝트 활성화
+    //    sanitizerEffect.SetActive(true);
+
+    //    // 지정 시간만큼 기다리기
+    //    yield return new WaitForSeconds(duration);
+
+    //    // 이펙트 오브젝트 비활성화
+    //    sanitizerEffect.SetActive(false); 
+    //}
 }

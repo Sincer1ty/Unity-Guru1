@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CollectVaccine : MonoBehaviour
 {
+    
     public GameObject vaccine;
     public Transform parent;
     public AudioSource collectSound;
+    public int score = 1;    
+     
 
     private void Update()
     {
@@ -16,6 +19,7 @@ public class CollectVaccine : MonoBehaviour
     private void Function_Instantiate()
     {
         GameObject inst = Instantiate(vaccine, parent);
+        
     }
 
     //IEnumerator dropTheItems()
@@ -30,7 +34,7 @@ public class CollectVaccine : MonoBehaviour
     {
         // 백신 얻으면 효과음 나면서 UI의 개수 1증가
         collectSound.Play();
-        ScoringSystem.theScore += 1;
-        Destroy(gameObject);
+        other.gameObject.GetComponent<ScoringSystem>().AddScore(score);
+        //Destroy(gameObject);
     }
 }

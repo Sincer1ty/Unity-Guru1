@@ -265,6 +265,7 @@ public class VillainFSM : MonoBehaviour
 
         // 죽음 상태 처리 코루틴 실행
         StartCoroutine(DieProcess());
+        VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
     }
 
     IEnumerator DieProcess()

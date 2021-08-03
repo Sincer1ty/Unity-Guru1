@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A471140F-C5E1-59B7-0890-97153C9AED8F}</ProjectGuid>
+    <ProjectGuid>{646CC3A9-0786-AF46-0F22-3D906F34B1F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,24 +53,33 @@
     <UnityVersion>2020.3.12f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\VirusFSM.cs" />
     <Compile Include="Assets\Scripts\CamRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\DemoFree.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\SimpleSampleCharacterControl.cs" />
+    <Compile Include="Assets\EndingScene\EndingButton.cs" />
     <Compile Include="Assets\Scripts\FadeController.cs" />
     <Compile Include="Assets\UPDATE\ScoringSystem.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\VaccineDrop.cs" />
     <Compile Include="Assets\Scripts\CamFollow.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Fighter Pack Bundle FREE\Code\CameraControl.cs" />
     <Compile Include="Assets\UPDATE\StartMenu\MainMenu.cs" />
     <Compile Include="Assets\UPDATE\Enemy_HP\Billboard.cs" />
+    <Compile Include="Assets\Fighter Pack Bundle FREE\Code\FighterAnimationDemoFREE.cs" />
     <Compile Include="Assets\Scripts\PlayerRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
+    <Compile Include="Assets\EndingScene\TimeDelay.cs" />
     <Compile Include="Assets\Scripts\CameraRig.cs" />
     <Compile Include="Assets\Scripts\VillainFSM.cs" />
     <Compile Include="Assets\Scripts\PlayerFire.cs" />
@@ -79,13 +88,17 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Scripts\BillBoard.cs" />
+    <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\FreeCameraLogic.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
+    <None Include="Assets\Supercyan Character Pack Free Sample\Shaders\Legacy\CelShader.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\Supercyan Character Pack Free Sample\Shaders\SupercyanShader.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\Supercyan Character Pack Free Sample\Shaders\SupercyanShaderLighting.cginc" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

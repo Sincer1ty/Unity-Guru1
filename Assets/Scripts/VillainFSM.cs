@@ -180,6 +180,7 @@ public class VillainFSM : MonoBehaviour
                 currentTime = 0;
                 //플레이어 공격
                 print("Villain의 공격!");
+                HitEvent();
             }
 
             //// 일정한 시간마다 플레이어 공격

@@ -14,6 +14,6 @@ public class MainMenu : MonoBehaviour
     // 다음 버튼을 누르면 게임 씬으로 이동
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene_re");
     }
 }

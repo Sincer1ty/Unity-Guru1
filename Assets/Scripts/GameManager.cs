@@ -87,7 +87,17 @@ public class GameManager : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        
+        if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0)
+        {
+            GameObject.Find("BadEndingIntro").GetComponent<FadeController>().Fade();
+        }
+
+
+        if (GameObject.Find("Vaccine Score").GetComponent<ScoringSystem>().end_count == 10) // 해피엔딩씬 조건
+        {
+            GameObject.Find("HappyEndingIntro").GetComponent<FadeController>().Fade();
+
+        }
     }
 
     // 옵션 메뉴 켜기

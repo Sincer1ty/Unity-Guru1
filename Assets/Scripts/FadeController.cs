@@ -55,15 +55,15 @@ public class FadeController : MonoBehaviour
     {
         if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0)
         {
-            SceneManager.LoadScene("SampleScene"); // 배드엔딩씬 넣기
+            SceneManager.LoadScene("BadEnding"); // 배드엔딩씬 넣기
         }
         
-        /*
-        if() // 해피엔딩씬 조건
+       
+        if(GameObject.Find("Vaccine Score").GetComponent<ScoringSystem>().end_count==10) // 해피엔딩씬 조건
         {
-            SceneManager.LoadScene(""); // 해피엔딩씬 넣기
+            SceneManager.LoadScene("HappyScene"); // 해피엔딩씬 넣기
         }
-        */
+     
     }
     
     

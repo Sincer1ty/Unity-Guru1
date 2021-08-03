@@ -46,6 +46,15 @@ public class PlayerController : MonoBehaviour
     // 이펙트 UI 오브젝트
     public GameObject hitEffect;
 
+    //애니메이션컴포넌트
+    Animator anim;
+
+    //피격시 사운드
+    // AudioSource audio;
+    // public AudioClip audioDamaged;
+    
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +63,12 @@ public class PlayerController : MonoBehaviour
 
         //체력변수 초기화
         hp = maxHp;
+
+        //자식오브젝트의 애니메이션 컴포넌트를가져오기
+        anim = GetComponentInChildren<Animator>();
+
+        //this.audio = GetComponent<AudioSource>();
+      
     }
 
     // Update is called once per frame
@@ -74,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
         //이동방향 월드좌표 설정
         dir = transform.TransformDirection(dir);
+
         //플레이어가 땅에 착지시 현재 점프 횟수를 0으로 초기화
         //수직 속도 값(중력)을 다시 0으로 초기화
         if (cc.collisionFlags == CollisionFlags.Below)
@@ -88,6 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount++;
             yVelocity = jumpPower;
+
         }
 
         //캐릭터의 수직속도(중력)을 적용
@@ -122,6 +139,9 @@ public class PlayerController : MonoBehaviour
             characterBody.forward = lookForward;
             //transform.position += moveDir * Time.deltaTime * 5f;
 
+            //move애니메이션 실행
+            anim.SetBool("isMove", isMove);
+
         }
     }
 
@@ -151,11 +171,14 @@ public class PlayerController : MonoBehaviour
         if (hp < 0)
         {
             hp = 0;
+            anim.SetTrigger("isDie");
         }
         // hp가 0보다 큰 경우에는 화면이 붉어지는 이펙트 코루틴을 실행
         else
         {
             StartCoroutine(HitEffect());
+            anim.SetTrigger("isHitten");
+            //audio.clip = audioDamaged;
         }
     }
 

@@ -63,6 +63,13 @@ public class VillainFSM : MonoBehaviour
     //네비게이션 메쉬 에이전트
     NavMeshAgent smith;
 
+    //애니메이터 컴포넌트 변수
+    Animator anim;
+
+    //피격시 사운드
+    AudioSource audio;
+    public AudioClip audioDamaged;
+
     void Start()
     {
         // 초기 빌런 상태는 idle
@@ -85,6 +92,11 @@ public class VillainFSM : MonoBehaviour
         smith = GetComponent<NavMeshAgent>();
         smith.speed = moveSpeed;
         smith.stoppingDistance = attackDistance;
+
+        //자식오브젝트의 애니메이션 컴포넌트를가져오기
+        anim = GetComponentInChildren<Animator>();
+
+        this.audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -129,7 +141,9 @@ public class VillainFSM : MonoBehaviour
         {
             //이동 상태로 변경
             v_state = VillainState.Move;
-            print("Villain 상태전환: Idle -> Move");            
+            print("Villain 상태전환: Idle -> Move");
+
+            anim.SetTrigger("IdletoMove");
         }
     }
 
@@ -147,6 +161,12 @@ public class VillainFSM : MonoBehaviour
         // 플레이어와의 거리가 공격 범위보다 멀 경우 >> 플레이어를 향해 이동
         else if (Vector3.Distance(player.transform.position, transform.position) > attackDistance)
         {
+            //이동방향 구한다
+            Vector3 dir = (player.transform.position - transform.position).normalized;
+
+            //나의 전방 방향을 이동방향과 일치시킨다
+            transform.forward = dir;
+
             //네브메쉬 에이전트를 이용하여 타겟 방향으로 이동
             smith.SetDestination(player.transform.position);
             smith.stoppingDistance = attackDistance;
@@ -158,6 +178,9 @@ public class VillainFSM : MonoBehaviour
             //공격 상태로 변경
             v_state = VillainState.Attack;
             print("Villain 상태 전환: Move -> Attack");
+
+            //애니메이션 호출
+            anim.SetTrigger("MovetoAttackDelay");
 
             // 누적 시간을 공격 딜레이 시간만큼 미리 진행
             currentTime = attackDelay;
@@ -181,6 +204,10 @@ public class VillainFSM : MonoBehaviour
                 //플레이어 공격
                 print("Villain의 공격!");
                 HitEvent();
+
+                anim.SetTrigger("StartAttack");
+                audio.clip = audioDamaged;
+
             }
 
             //// 일정한 시간마다 플레이어 공격
@@ -201,6 +228,8 @@ public class VillainFSM : MonoBehaviour
             //이동 상태로 전환
             v_state = VillainState.Move;
             print("Villain 상태 전환: Attack -> Move");
+
+            anim.SetTrigger("AttacktoMove");
         }
     }
 
@@ -228,6 +257,7 @@ public class VillainFSM : MonoBehaviour
 
             // 방향을 복귀 지점으로 전환
             transform.forward = dir;
+
         }
         // 그렇지 않다면 자신의 위치를 초기 위치로 조정 >> 대기 상태 전환
         else
@@ -265,7 +295,6 @@ public class VillainFSM : MonoBehaviour
 
         // 죽음 상태 처리 코루틴 실행
         StartCoroutine(DieProcess());
-        VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
     }
 
     IEnumerator DieProcess()

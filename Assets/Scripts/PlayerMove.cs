@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
 public class PlayerMove : MonoBehaviour
 {
     //중력 변수
@@ -38,9 +39,6 @@ public class PlayerMove : MonoBehaviour
 
     //회전 감도
     public float rotSpeed = 200.0f;
-
-    // 이펙트 UI 오브젝트
-    public GameObject hitEffect;
 
 
     // Start is called before the first frame update
@@ -122,26 +120,6 @@ public class PlayerMove : MonoBehaviour
     {
         // 에너미의 공격력만큼 플레이어의 체력 감소
         hp -= damage;
-        if(hp < 0)
-        {
-            hp = 0;
-        }
-        // hp가 0보다 큰 경우에는 화면이 붉어지는 이펙트 코루틴을 실행
-        else
-        {
-            StartCoroutine(HitEffect());
-        }
-    }
-
-    IEnumerator HitEffect()
-    {
-        // 1. 이펙트를 켠다(활성화 시킨다)
-        hitEffect.SetActive(true);
-
-        // 2. 0.3초 기다린다
-        yield return new WaitForSeconds(0.3f);
-
-        // 3. 이펙트를 끈다(비활성화)
-        hitEffect.SetActive(false);
     }
 }
+*/

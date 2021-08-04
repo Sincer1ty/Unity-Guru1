@@ -26,11 +26,14 @@ public class CollectVaccine : MonoBehaviour
     //    Instantiate(gameObject, transform.position, Quaternion.identity);
     //}
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider collider)
     {
-        // 백신 얻으면 효과음 나면서 UI의 개수 1증가
-        collectSound.Play();
-        ScoringSystem.theScore += 1;
-        Destroy(gameObject);
+        if(collider.gameObject.tag == "Player")
+        {
+            // 백신 얻으면 효과음 나면서 UI의 개수 1증가
+            collectSound.Play();
+            ScoringSystem.theScore += 1;
+            Destroy(gameObject);
+        }   
     }
 }

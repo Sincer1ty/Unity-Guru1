@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     Animator anim;
 
     //피격시 사운드
-    // AudioSource audio;
-    // public AudioClip audioDamaged;
+    AudioSource audio;
+    public AudioClip audioDamaged;
     
 
     
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         //자식오브젝트의 애니메이션 컴포넌트를가져오기
         anim = GetComponentInChildren<Animator>();
 
-        //this.audio = GetComponent<AudioSource>();
+        this.audio = GetComponent<AudioSource>();
       
     }
 
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(HitEffect());
             anim.SetTrigger("isHitten");
-            //audio.clip = audioDamaged;
+            audio.Play();
         }
     }
 

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7F5A096C-4B04-F81E-8C35-BD8BF031DAC4}</ProjectGuid>
+    <ProjectGuid>{51A31D19-FB7F-6602-E49F-1B6F82C3B5B2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Scripts\VaccineManager.cs" />
     <Compile Include="Assets\Scripts\VirusFSM.cs" />
     <Compile Include="Assets\Scripts\CamRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\SimpleSampleCharacterControl.cs" />
     <Compile Include="Assets\EndingScene\EndingButton.cs" />
     <Compile Include="Assets\Scripts\FadeController.cs" />
-    <Compile Include="Assets\UPDATE\ScoringSystem.cs" />
+    <Compile Include="Assets\Scripts\ScoringSystem.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\VaccineDrop.cs" />
     <Compile Include="Assets\Scripts\CamFollow.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\CameraRig.cs" />
     <Compile Include="Assets\Scripts\VillainFSM.cs" />
     <Compile Include="Assets\Scripts\PlayerFire.cs" />
+    <Compile Include="Assets\Scripts\Vaccine.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\UPDATE\CollectVaccine.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />

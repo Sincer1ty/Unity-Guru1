@@ -66,9 +66,7 @@ public class VillainFSM : MonoBehaviour
     //애니메이터 컴포넌트 변수
     Animator anim;
 
-    //피격시 사운드
-    AudioSource audio;
-    public AudioClip audioDamaged;
+    
 
     void Start()
     {
@@ -96,7 +94,7 @@ public class VillainFSM : MonoBehaviour
         //자식오브젝트의 애니메이션 컴포넌트를가져오기
         anim = GetComponentInChildren<Animator>();
 
-        this.audio = GetComponent<AudioSource>();
+       
     }
 
     // Update is called once per frame
@@ -206,7 +204,7 @@ public class VillainFSM : MonoBehaviour
                 HitEvent();
 
                 anim.SetTrigger("StartAttack");
-                audio.clip = audioDamaged;
+               
 
             }
 

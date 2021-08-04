@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Vaccine : MonoBehaviour
 {
     [System.NonSerialized]
     public int score = 1;
+
+    
     
     
     public void SetScoreValue(int score)
@@ -21,6 +24,7 @@ public class Vaccine : MonoBehaviour
             //col.gameObject.GetComponent<ScoringSystem>().AddScore(score);
             //Destroy(gameObject);
             ReMoveFromWorld();
+            GameObject.Find("GameManager").GetComponent<ScoringSystem>().score += 1;
         }
     }
     public void ReMoveFromWorld()

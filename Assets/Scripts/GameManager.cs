@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (GameObject.Find("Vaccine Score").GetComponent<ScoringSystem>().end_count == 10) // 해피엔딩씬 조건
+        if (GameObject.Find("Vaccine Score").GetComponent<ScoringSystem>().score == 10) // 해피엔딩씬 조건
         {
             GameObject.Find("HappyEndingIntro").GetComponent<FadeController>().Fade();
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectVaccine : MonoBehaviour
 {
+    /*
     public GameObject vaccine;
     public Transform parent;
     public AudioSource collectSound;
@@ -36,4 +37,5 @@ public class CollectVaccine : MonoBehaviour
             Destroy(gameObject);
         }   
     }
+    */
 }

@@ -51,7 +51,7 @@ public class VaccineManager : MonoBehaviour
             reusedVaccine = newVaccine;
         }
         reusedVaccine.SetActive(true);
-        reusedVaccine.GetComponent<Vaccine>().SetScoreValue(VaccineValue);
+        reusedVaccine.GetComponent<Vaccine>().SetScoreValue(VaccineValue); 
         reusedVaccine.transform.position = new Vector3(pos.x, reusedVaccine.transform.position.y, pos.z);
     }
     

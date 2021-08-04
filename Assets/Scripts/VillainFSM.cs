@@ -293,6 +293,9 @@ public class VillainFSM : MonoBehaviour
 
         // 죽음 상태 처리 코루틴 실행
         StartCoroutine(DieProcess());
+
+        VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
+
     }
 
     IEnumerator DieProcess()
@@ -303,6 +306,9 @@ public class VillainFSM : MonoBehaviour
         // 2초동안 기다린 후 자기 자신 제거
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+
+      
+
     }
 
     // 데미지 처리 함수

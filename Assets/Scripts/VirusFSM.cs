@@ -187,6 +187,7 @@ public class VirusFSM : MonoBehaviour
                 currentTime = 0;
                 //플레이어 공격
                 print("공격!");
+                anim.SetTrigger("StartAttack");
             }
 
             //// 일정한 시간마다 플레이어 공격
@@ -250,6 +251,7 @@ public class VirusFSM : MonoBehaviour
     // 데미지 처리용 코루틴 함수
     IEnumerator DamageProcess()
     {
+        anim.SetTrigger("Damaged");
         // 피격 모션만큼 기다리기
         yield return new WaitForSeconds(0.5f);
 
@@ -265,7 +267,11 @@ public class VirusFSM : MonoBehaviour
         // 죽음 상태 처리 코루틴 실행
         StartCoroutine(DieProcess());
 
+        anim.SetTrigger("Die");
+
         VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
+
+       
 
     }
 

@@ -274,11 +274,13 @@ public class VillainFSM : MonoBehaviour
     {
         // 피격 상태 처리 코루틴 실행
         StartCoroutine(DamageProcess());
+        
     }
 
     // 데미지 처리용 코루틴 함수
     IEnumerator DamageProcess()
     {
+        anim.SetTrigger("Damaged");
         // 피격 모션만큼 기다리기
         yield return new WaitForSeconds(0.5f);
 
@@ -293,6 +295,8 @@ public class VillainFSM : MonoBehaviour
 
         // 죽음 상태 처리 코루틴 실행
         StartCoroutine(DieProcess());
+        
+        anim.SetTrigger("Die");
 
         VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
 

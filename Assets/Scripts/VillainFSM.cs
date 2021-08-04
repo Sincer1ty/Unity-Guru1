@@ -280,7 +280,7 @@ public class VillainFSM : MonoBehaviour
     // 데미지 처리용 코루틴 함수
     IEnumerator DamageProcess()
     {
-        anim.SetTrigger("Damaged");
+       // anim.SetTrigger("Damaged");
         // 피격 모션만큼 기다리기
         yield return new WaitForSeconds(0.5f);
 

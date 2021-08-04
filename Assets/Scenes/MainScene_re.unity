@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1b633269e4ab8dc4f8434d5bc3ba1023, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -34067,9 +34067,9 @@ GameObject:
   - component: {fileID: 1662588253}
   - component: {fileID: 1662588252}
   - component: {fileID: 1662588251}
-  - component: {fileID: 1662588249}
   - component: {fileID: 1662588254}
   - component: {fileID: 1662588250}
+  - component: {fileID: 1662588249}
   m_Layer: 8
   m_Name: Virus
   m_TagString: Untagged
@@ -34084,9 +34084,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662588248}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c33f8131809e2458bbc1e0ecfe4e81, type: 3}
+  m_Script: {fileID: 11500000, guid: f6ffff86e8ea0ab4c88efbbb37a63552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   findDistance: 8

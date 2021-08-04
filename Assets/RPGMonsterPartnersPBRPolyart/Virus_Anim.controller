@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: MoveToAttackDelay
+    m_ConditionEvent: MovetoAttackDelay
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2052504223770698731}
@@ -114,13 +114,13 @@ AnimatorController:
   m_Name: Virus_Anim
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IdleToMove
+  - m_Name: IdletoMove
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: MoveToAttackDelay
+  - m_Name: MovetoAttackDelay
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -132,7 +132,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: AttackToMove
+  - m_Name: AttacktoMove
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -160,7 +160,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: AttackToMove
+    m_ConditionEvent: AttacktoMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5893265450650913190}
@@ -279,7 +279,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IdleToMove
+    m_ConditionEvent: IdletoMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5893265450650913190}
@@ -378,7 +378,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: AttackToMove
+    m_ConditionEvent: AttacktoMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5893265450650913190}

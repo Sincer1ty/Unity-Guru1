@@ -723,6 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba6c6252ba99ce4a9253dc6fee16b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  second: 18
   RestartButton: {fileID: 8032584680495300630}
   QuitButton: {fileID: 8032584680255519291}
 --- !u!4 &8032584679173011071

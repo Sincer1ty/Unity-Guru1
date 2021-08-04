@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TimeDelay : MonoBehaviour
 {
+    public int second = 15;
 
     public GameObject RestartButton;
     public GameObject QuitButton;
@@ -18,7 +19,7 @@ public class TimeDelay : MonoBehaviour
 
     IEnumerator Timedelay()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(second);
 
         RestartButton.SetActive(true);
         QuitButton.SetActive(true);

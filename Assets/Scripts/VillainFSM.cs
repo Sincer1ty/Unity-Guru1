@@ -70,14 +70,14 @@ public class VillainFSM : MonoBehaviour
 
     void Start()
     {
+        //캐릭터 컨트롤러 컴포넌트 받기
+        cc = GetComponent<CharacterController>();
+
         // 초기 빌런 상태는 idle
         v_state = VillainState.Idle;
 
         // 플레이어 검색
         player = GameObject.Find("Player");
-
-        // 캐릭터 컨트롤러 가져오기
-        cc = GetComponent<CharacterController>();
 
         // 초기 위치, 회전 저장
         originPos = transform.position;
@@ -251,8 +251,8 @@ public class VillainFSM : MonoBehaviour
             //print("return");
             //Vector3 dir = (originPos - transform.position).normalized;
             Vector3 dir = dist.normalized;
-            cc.Move(dir * moveSpeed * Time.deltaTime);
-
+            Vector3 tar = dir * moveSpeed * Time.deltaTime;
+            smith.SetDestination(tar);
             // 방향을 복귀 지점으로 전환
             transform.forward = dir;
 
@@ -280,7 +280,7 @@ public class VillainFSM : MonoBehaviour
     // 데미지 처리용 코루틴 함수
     IEnumerator DamageProcess()
     {
-       // anim.SetTrigger("Damaged");
+        anim.SetTrigger("Damaged");
         // 피격 모션만큼 기다리기
         yield return new WaitForSeconds(0.5f);
 

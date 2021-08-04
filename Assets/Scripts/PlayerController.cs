@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
 
     //피격시 사운드
-    AudioSource audio;
+    new AudioSource audio;
     public AudioClip audioDamaged;
     
 

@@ -244,7 +244,7 @@ public class VillainFSM : MonoBehaviour
         Vector3 dist = originPos - transform.position;
         dist.y = 0;
 
-        // 초기 위치에서의 거리가 0.1f 초과면 초기 위치 쪽으로 이동
+        // 초기 위치에서의 거리가 0.9f 초과면 초기 위치 쪽으로 이동
         //if (Vector3.Distance(transform.position, originPos) > 1.0f)
         if (dist.magnitude > 0.9f)
         {

@@ -17,8 +17,8 @@ public class VirusFSM : MonoBehaviour
         Die
     }
 
-    // 빌런 상태 변수
-    VirusState vr_state;
+    // 바이러스 상태 변수
+    VirusState v_state;
 
     //플레이어 게임 오브젝트
     GameObject player;
@@ -41,7 +41,7 @@ public class VirusFSM : MonoBehaviour
     // 공격 딜레이 시간
     float attackDelay = 2.0f;
 
-    // 빌런 공격력
+    // 바이러스 공격력
     public int attackPower = 3;
 
     // 초기 위치 저장용 변수
@@ -63,21 +63,19 @@ public class VirusFSM : MonoBehaviour
     //네비게이션 메쉬 에이전트
     NavMeshAgent smith;
 
-    //애니메이터 컴포넌트 변수
+    // 애니메이터 컴포넌트 변수
     Animator anim;
-
-
 
     void Start()
     {
-        //캐릭터 컨트롤러 컴포넌트 받기
-        cc = GetComponent<CharacterController>();
-
         // 초기 빌런 상태는 idle
-        vr_state = VirusState.Idle;
+        v_state = VirusState.Idle;
 
         // 플레이어 검색
         player = GameObject.Find("Player");
+
+        // 캐릭터 컨트롤러 가져오기
+        cc = GetComponent<CharacterController>();
 
         // 초기 위치, 회전 저장
         originPos = transform.position;
@@ -91,10 +89,8 @@ public class VirusFSM : MonoBehaviour
         smith.speed = moveSpeed;
         smith.stoppingDistance = attackDistance;
 
-        //자식오브젝트의 애니메이션 컴포넌트를가져오기
+        // 자식 오브젝트의 애니메이터 컴포넌트 가져오기
         anim = GetComponentInChildren<Animator>();
-
-
     }
 
     // Update is called once per frame
@@ -107,7 +103,7 @@ public class VirusFSM : MonoBehaviour
         }
 
         // 현재 상태 체크 >> 해당 상태별로 정해진 기능 수행
-        switch (vr_state)
+        switch (v_state)
         {
             case VirusState.Idle:
                 Idle();
@@ -138,10 +134,9 @@ public class VirusFSM : MonoBehaviour
         if (Vector3.Distance(player.transform.position, transform.position) < findDistance)
         {
             //이동 상태로 변경
-            vr_state = VirusState.Move;
-            print("Villain 상태전환: Idle -> Move");
-
-            anim.SetTrigger("IdletoMove");
+            v_state = VirusState.Move;
+            print("상태전환: Idle -> Move");
+            anim.SetTrigger("IdleToMove");
         }
     }
 
@@ -152,19 +147,13 @@ public class VirusFSM : MonoBehaviour
         if (Vector3.Distance(originPos, transform.position) > moveDistance)
         {
             // 현재 상태를 복귀로 전환
-            vr_state = VirusState.Return;
-            print("Villain 상태 전환: Move -> Return");
+            v_state = VirusState.Return;
+            print("상태 전환: Move -> Return");
         }
 
         // 플레이어와의 거리가 공격 범위보다 멀 경우 >> 플레이어를 향해 이동
         else if (Vector3.Distance(player.transform.position, transform.position) > attackDistance)
         {
-            //이동방향 구한다
-            Vector3 dir = (player.transform.position - transform.position).normalized;
-
-            //나의 전방 방향을 이동방향과 일치시킨다
-            transform.forward = dir;
-
             //네브메쉬 에이전트를 이용하여 타겟 방향으로 이동
             smith.SetDestination(player.transform.position);
             smith.stoppingDistance = attackDistance;
@@ -174,11 +163,8 @@ public class VirusFSM : MonoBehaviour
         else
         {
             //공격 상태로 변경
-            vr_state = VirusState.Attack;
-            print("Villain 상태 전환: Move -> Attack");
-
-            //애니메이션 호출
-            anim.SetTrigger("MovetoAttackDelay");
+            v_state = VirusState.Attack;
+            print("상태 전환: Move -> Attack");
 
             // 누적 시간을 공격 딜레이 시간만큼 미리 진행
             currentTime = attackDelay;
@@ -200,12 +186,8 @@ public class VirusFSM : MonoBehaviour
             {
                 currentTime = 0;
                 //플레이어 공격
-                print("Virus의 공격!");
-                HitEvent();
-
+                print("공격!");
                 anim.SetTrigger("StartAttack");
-
-
             }
 
             //// 일정한 시간마다 플레이어 공격
@@ -224,38 +206,28 @@ public class VirusFSM : MonoBehaviour
         else
         {
             //이동 상태로 전환
-            vr_state = VirusState.Move;
-            print("Virus 상태 전환: Attack -> Move");
-
-            anim.SetTrigger("AttacktoMove");
+            v_state = VirusState.Move;
+            print("상태 전환: Attack -> Move");
         }
     }
 
     //플레이어에게 데미지를 주는 함수
     public void HitEvent()
     {
-        PlayerController pc = player.GetComponent<PlayerController>();
-        pc.DamageAction(attackPower);
+        PlayerMove pm = player.GetComponent<PlayerMove>();
+        pm.DamageAction(attackPower);
     }
 
     void Return()
     {
-
-        Vector3 dist = originPos - transform.position;
-        dist.y = 0;
-
-        // 초기 위치에서의 거리가 0.1f 초과면 초기 위치 쪽으로 이동
-        //if (Vector3.Distance(transform.position, originPos) > 1.0f)
-        if (dist.magnitude > 0.9f)
+        // 초기 위치에서의 거리가 0.1f 이상이면 초기 위치 쪽으로 이동
+        if (Vector3.Distance(transform.position, originPos) > 0.1f)
         {
-            //print("return");
-            //Vector3 dir = (originPos - transform.position).normalized;
-            Vector3 dir = dist.normalized;
-            Vector3 tar = dir * moveSpeed * Time.deltaTime;
-            smith.SetDestination(tar);
+            Vector3 dir = (originPos - transform.position).normalized;
+            smith.SetDestination(originPos);
+
             // 방향을 복귀 지점으로 전환
             transform.forward = dir;
-
         }
         // 그렇지 않다면 자신의 위치를 초기 위치로 조정 >> 대기 상태 전환
         else
@@ -264,9 +236,9 @@ public class VirusFSM : MonoBehaviour
             transform.position = originPos;
             transform.rotation = originRot;
 
-            //대기 상태로 전환
-            vr_state = VirusState.Idle;
-            print("Villain 상태 전환: Return -> Idle");
+            // hp 다시 회복
+
+            v_state = VirusState.Idle;
         }
     }
 
@@ -274,19 +246,17 @@ public class VirusFSM : MonoBehaviour
     {
         // 피격 상태 처리 코루틴 실행
         StartCoroutine(DamageProcess());
-
     }
 
     // 데미지 처리용 코루틴 함수
     IEnumerator DamageProcess()
     {
-        print("virus");
         anim.SetTrigger("Damaged");
         // 피격 모션만큼 기다리기
         yield return new WaitForSeconds(0.5f);
 
         // 현재 상태를 이동 상태로 전환
-        vr_state = VirusState.Move;
+        v_state = VirusState.Move;
     }
 
     void Die()
@@ -299,7 +269,9 @@ public class VirusFSM : MonoBehaviour
 
         anim.SetTrigger("Die");
 
+        VaccineManager.instance.DropVaccineToPosition(transform.position, 1);
 
+       
 
     }
 
@@ -312,15 +284,14 @@ public class VirusFSM : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
 
-
-
+        
     }
 
     // 데미지 처리 함수
     public void HitVillain(int value)
     {
         // 이미 피격, 사망, 복귀 상태라면 함수 종료
-        if (vr_state == VirusState.Damaged || vr_state == VirusState.Die || vr_state == VirusState.Return)
+        if (v_state == VirusState.Damaged || v_state == VirusState.Die || v_state == VirusState.Return)
         {
             return;
         }
@@ -328,21 +299,22 @@ public class VirusFSM : MonoBehaviour
         // 플레이어의 공격력만큼 에너미 체력 감소
         currentHp -= value;
 
-        // 빌런 hp가 0보다 크면 
+        // 바이러스 hp가 0보다 크면 
         if (currentHp > 0)
         {
             //피격 상태로 전환
-            vr_state = VirusState.Damaged;
-            print("Villain 상태 전환: Any state -> Damaged");
+            v_state = VirusState.Damaged;
+            print("상태 전환: Any state -> Damaged");
             Damaged();
         }
         // 그렇지 않다면
         else
         {
             //죽음 상태로 전환
-            vr_state = VirusState.Die;
-            print("Villain 상태 전환: Any state -> Die");
+            v_state = VirusState.Die;
+            print("상태 전환: Any state -> Die");
             Die();
         }
     }
 }
+

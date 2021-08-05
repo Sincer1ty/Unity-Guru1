@@ -59,7 +59,7 @@ public class FadeController : MonoBehaviour
         }
         
        
-        if(GameObject.Find("Vaccine Score").GetComponent<ScoringSystem>().score==10) // 해피엔딩씬 조건
+        if(GameObject.Find("GameManager").GetComponent<ScoringSystem>().score==10) // 해피엔딩씬 조건
         {
             SceneManager.LoadScene("HappyScene"); // 해피엔딩씬 넣기
         }

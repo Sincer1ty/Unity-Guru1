@@ -34747,6 +34747,7 @@ GameObject:
   - component: {fileID: 1662588254}
   - component: {fileID: 1662588250}
   - component: {fileID: 1662588249}
+  - component: {fileID: 1662588255}
   m_Layer: 8
   m_Name: Virus
   m_TagString: Untagged
@@ -34879,6 +34880,25 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1662588255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662588248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c33f8131809e2458bbc1e0ecfe4e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  findDistance: 8
+  moveSpeed: 5
+  attackDistance: 2
+  attackPower: 3
+  moveDistance: 20
+  maxHp: 10
+  hpSlider: {fileID: 25600351}
 --- !u!64 &1663912410
 MeshCollider:
   m_ObjectHideFlags: 0

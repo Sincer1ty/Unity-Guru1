@@ -52,8 +52,9 @@ public class PlayerController : MonoBehaviour
     //피격시 사운드
     new AudioSource audio;
     public AudioClip audioDamaged;
+    
 
-
+    
     // Start is called before the first frame update
     void Start()
     {

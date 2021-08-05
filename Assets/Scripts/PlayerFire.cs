@@ -45,14 +45,23 @@ public class PlayerFire : MonoBehaviour
         Vector3 hitPosition = Vector3.zero;
 
         //레이를 발사해서 부딪힌 대상이 있다면
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    string layerName = LayerMask.LayerToName(hit.transform.gameObject.layer);
+
+        //    //부딪힌 대상의 이름을 콘솔창에 출력
+        //    print(layerName);
+        //}
+
+        //레이캐스트
         if (Physics.Raycast(ray, out hit))
         {
+            string layerName = LayerMask.LayerToName(hit.transform.gameObject.layer);
+
             //부딪힌 대상의 이름을 콘솔창에 출력
-            print(hit.transform.name);
-        }
-        //레이캐스트
-        if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance))
-        {
+            print(layerName);
+
+            //print("h");
             //레이가 충돌한 경우
 
             ////충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
@@ -61,7 +70,6 @@ public class PlayerFire : MonoBehaviour
             //레이에 부딪힌 대상의 레이어가 'Enemy'일 경우 데미지 함수 실행
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                print("h");
                 VillainFSM vFSM = hit.transform.GetComponent<VillainFSM>();
                 //HitVillain 함수 실행
                 vFSM.HitVillain(weaponPower);

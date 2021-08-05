@@ -251,8 +251,7 @@ public class VillainFSM : MonoBehaviour
             //print("return");
             //Vector3 dir = (originPos - transform.position).normalized;
             Vector3 dir = dist.normalized;
-            Vector3 tar = dir * moveSpeed * Time.deltaTime;
-            smith.SetDestination(tar);
+            smith.SetDestination(originPos);
             // 방향을 복귀 지점으로 전환
             transform.forward = dir;
 
@@ -286,6 +285,7 @@ public class VillainFSM : MonoBehaviour
 
         // 현재 상태를 이동 상태로 전환
         v_state = VillainState.Move;
+        print("Villain 상태 전환: Damged -> Move");
     }
 
     void Die()
@@ -318,6 +318,7 @@ public class VillainFSM : MonoBehaviour
     // 데미지 처리 함수
     public void HitVillain(int value)
     {
+        print("Hit");
         // 이미 피격, 사망, 복귀 상태라면 함수 종료
         if (v_state == VillainState.Damaged || v_state == VillainState.Die || v_state == VillainState.Return)
         {

@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     // 옵션 메뉴 UI 오브젝트
     public GameObject optionUI;
 
+    // 게임 오버 출력
+    public GameObject gameOver;
+
     private void Awake()
     {
         if (gm == null)
@@ -87,8 +90,9 @@ public class GameManager : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0) // 배디엔딩씬 조건
         {
+            gameOver.SetActive(true);
             GameObject.Find("BadEndingIntro").GetComponent<FadeController>().Fade();
         }
 

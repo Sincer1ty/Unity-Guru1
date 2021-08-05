@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A471140F-C5E1-59B7-0890-97153C9AED8F}</ProjectGuid>
+    <ProjectGuid>{E2D0644A-0E21-DEDE-4E6A-916223AD33E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,6 +60,7 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\VaccineManager.cs" />
     <Compile Include="Assets\Scripts\VirusFSM.cs" />
+    <Compile Include="Assets\Scripts\CamRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\DemoFree.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\UPDATE\StartMenu\MainMenu.cs" />
     <Compile Include="Assets\UPDATE\Enemy_HP\Billboard.cs" />
     <Compile Include="Assets\Fighter Pack Bundle FREE\Code\FighterAnimationDemoFREE.cs" />
+    <Compile Include="Assets\Scripts\HitEvent.cs" />
     <Compile Include="Assets\Scripts\PlayerRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

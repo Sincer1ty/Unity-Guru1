@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     // 옵션 메뉴 UI 오브젝트
     public GameObject optionUI;
 
+    // you die 텍스트 출력
+    public GameObject YouDie;
+
     private void Awake()
     {
         if (gm == null)
@@ -89,6 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.Find("Player").GetComponent<PlayerController>().hp <= 0)
         {
+            YouDie.SetActive(true);
             GameObject.Find("BadEndingIntro").GetComponent<FadeController>().Fade();
         }
 

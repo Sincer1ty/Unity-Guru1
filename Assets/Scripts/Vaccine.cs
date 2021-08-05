@@ -8,7 +8,7 @@ public class Vaccine : MonoBehaviour
     [System.NonSerialized]
     public int score = 1;
 
-    
+    public AudioSource collectSound;
     
     
     public void SetScoreValue(int score)
@@ -21,6 +21,7 @@ public class Vaccine : MonoBehaviour
     {
         if(col.gameObject.tag=="Player")
         {
+            collectSound.Play();
             //col.gameObject.GetComponent<ScoringSystem>().AddScore(score);
             //Destroy(gameObject);
             ReMoveFromWorld();

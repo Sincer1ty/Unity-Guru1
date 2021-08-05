@@ -27040,7 +27040,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277008024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -31753,7 +31753,7 @@ MonoBehaviour:
   maxJump: 6
   moveSpeed: 7
   hp: 0
-  maxHp: 100
+  maxHp: 1000
   hpSlider: {fileID: 1215867625}
   rotSpeed: 200
   hitEffect: {fileID: 970020070794761401}
@@ -33543,6 +33543,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2624715135203765138, guid: 2052e32cf0c016c45807ed8a1cc2b492, type: 3}
+      propertyPath: collectSound
+      value: 
+      objectReference: {fileID: 1277008025}
     - target: {fileID: 2624715135832142822, guid: 2052e32cf0c016c45807ed8a1cc2b492, type: 3}
       propertyPath: m_Name
       value: Vaccine
